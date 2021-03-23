@@ -1,0 +1,15 @@
+{
+    "name": "user/students",
+    "authors": [
+        {
+            "name": "KravtsovAlexander",
+            "email": "linejjka@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Dvach\\": "src/"
+        }
+    }
+}
