@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS applicants(
        email VARCHAR(255) UNIQUE NOT NULL,
       points INT NOT NULL,
    birthyear VARCHAR(4) NOT NULL,
-    is_local BOOLEAN NOT NULL
+    is_local BOOLEAN NOT NULL,
+       token VARCHAR(32) NOT NULL UNIQUE
 );

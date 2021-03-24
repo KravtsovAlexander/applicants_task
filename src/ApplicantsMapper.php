@@ -35,11 +35,10 @@ class ApplicantsMapper
     public function save(Applicant $applicant)
     {
         $sql = "
-            INSERT INTO applicants(name, lastname, sex, group_num, email, points, birthyear, is_local)
+            INSERT INTO applicants(name, lastname, sex, group_num, email, points, birthyear, is_local, token)
             VALUES
-            (:name, :lastname, :sex, :group_num, :email, :points, :birthyear, :is_local);
+            (:name, :lastname, :sex, :group_num, :email, :points, :birthyear, :is_local, :token);
         ";
-
         $data = [
             'name' => $applicant->name,
             'lastname' => $applicant->lastname,
@@ -49,13 +48,14 @@ class ApplicantsMapper
             'points' => $applicant->points,
             'birthyear' => $applicant->birthyear,
             'is_local' => $applicant->is_local,
+            'token' => bin2hex(random_bytes(16)),
         ];
-
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
     }
 
-    public function getApplicants() {
+    public function getApplicants()
+    {
         $sql = 'SELECT name, lastname, group_num, points FROM applicants';
         $statement = $this->connection->prepare($sql);
         $statement->execute();
