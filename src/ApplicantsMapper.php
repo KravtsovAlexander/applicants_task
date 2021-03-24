@@ -34,8 +34,6 @@ class ApplicantsMapper
      */
     public function save(Applicant $applicant)
     {
-        if (!isset($applicant->id)) {
-        }
         $sql = "
             INSERT INTO applicants(name, lastname, sex, group_num, email, points, birthyear, is_local)
             VALUES
@@ -43,14 +41,14 @@ class ApplicantsMapper
         ";
 
         $data = [
-            'name' => $applicant->getName(),
-            'lastname' => $applicant->getLastname(),
-            'sex' => $applicant->getSex(),
-            'group_num' => $applicant->getgroup_num(),
-            'email' => $applicant->getEmail(),
-            'points' => $applicant->getPoints(),
-            'birthyear' => $applicant->getBirthyear(),
-            'is_local' => $applicant->getIs_local(),
+            'name' => $applicant->name,
+            'lastname' => $applicant->lastname,
+            'sex' => $applicant->sex,
+            'group_num' => $applicant->group_num,
+            'email' => $applicant->email,
+            'points' => $applicant->points,
+            'birthyear' => $applicant->birthyear,
+            'is_local' => $applicant->is_local,
         ];
 
         $statement = $this->connection->prepare($sql);
@@ -61,6 +59,21 @@ class ApplicantsMapper
         $sql = 'SELECT name, lastname, group_num, points FROM applicants';
         $statement = $this->connection->prepare($sql);
         $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function getByEmail(string $email)
+    {
+        $sql = '
+            SELECT name, lastname, group_num, points
+            FROM applicants
+            WHERE email = :email;
+        ';
+        $data = ['email' => $email];
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($data);
+
         return $statement->fetchAll();
     }
 }

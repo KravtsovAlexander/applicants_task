@@ -5,6 +5,7 @@ namespace ApplicantTask\Controller;
 use ApplicantTask\Applicant;
 use ApplicantTask\Core\Controller;
 use ApplicantTask\ApplicantsMapper;
+use ApplicantTask\ApplicantValidator;
 use Exception;
 
 class RegistrationController extends Controller
@@ -22,19 +23,26 @@ class RegistrationController extends Controller
     public function registrateAction()
     {
         $post = $_POST;
+
+        // make a new instance of Applicant
         $applicant = new Applicant();
+        $applicant->name = $post['name'];
+        $applicant->lastname = $post['lastname'];
+        $applicant->birthyear = $post['birthyear'];
+        $applicant->sex = $post['sex'];
+        $applicant->email = $post['email'];
+        $applicant->group_num = $post['group_num'];
+        $applicant->points = $post['points'];
+        $applicant->is_local = $post['is_local'];
 
-        $applicant->setName($post['name']);
-        $applicant->setLastname($post['lastname']);
-        $applicant->setBirthyear($post['birthyear']);
-        $applicant->setSex($post['sex']);
-        $applicant->setEmail($post['email']);
-        $applicant->setgroup_num($post['group_num']);
-        $applicant->setPoints($post['points']);
-        $applicant->setIs_local($post['is_local']);
+        // validate
+        try {
+            ApplicantValidator::run($applicant);
+        } catch ( Exception $e) {
+            echo $e->getMessage();
+        }
 
-        // валидация
-
+        // save to a db
         $mapper = new ApplicantsMapper();
         try {
             $mapper->save($applicant);
@@ -42,7 +50,6 @@ class RegistrationController extends Controller
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-
     }
 
 

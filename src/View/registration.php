@@ -27,7 +27,7 @@
         </div>
 
         <div>
-            <input type="email" name="email" id="email" placeholder="email">
+            <input type="text" name="email" id="email" placeholder="email">
         </div>
 
         <div>
