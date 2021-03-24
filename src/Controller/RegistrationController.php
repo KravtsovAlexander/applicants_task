@@ -16,6 +16,7 @@ class RegistrationController extends Controller
         $template = 'template.php';
         $data = [
             'title' => 'Регистрация',
+            'isUser' => $this->isUser(),
         ];
         echo $this->render($content, $template, $data);
     }
@@ -34,6 +35,7 @@ class RegistrationController extends Controller
         $applicant->group_num = $post['group_num'];
         $applicant->points = $post['points'];
         $applicant->is_local = $post['is_local'];
+        $applicant->setToken(bin2hex(random_bytes(16)));
 
         // validate
         try {
@@ -46,6 +48,7 @@ class RegistrationController extends Controller
         $mapper = new ApplicantsMapper();
         try {
             $mapper->save($applicant);
+            setcookie('token', $applicant->getToken(), time()+60*60*24*365*10, '/');
             header('Location: /');
         } catch (Exception $e) {
             echo $e->getMessage();

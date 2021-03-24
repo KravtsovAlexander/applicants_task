@@ -21,4 +21,14 @@ class Controller
 
         return $page;
     }
+
+    protected function isUser()
+    {
+        $cookie = $_COOKIE;
+        if (isset($cookie['token'])) {
+            return true;
+        }
+
+        return false;
+    }
 }

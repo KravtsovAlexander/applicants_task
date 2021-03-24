@@ -11,7 +11,7 @@
 <body>
     <nav>
         <a href="/">Главная</a>
-        <?php if (isset($user)) : ?>
+        <?php if ($isUser) : ?>
             <a href="#">Редактировать профиль</a>
         <?php else : ?>
             <a href="/registration">Регистрация</a>

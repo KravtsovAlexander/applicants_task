@@ -48,12 +48,17 @@ class ApplicantsMapper
             'points' => $applicant->points,
             'birthyear' => $applicant->birthyear,
             'is_local' => $applicant->is_local,
-            'token' => bin2hex(random_bytes(16)),
+            'token' => $applicant->getToken(),
         ];
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
     }
 
+    /**
+     * Fetch list information of the all appplicants in a db
+     * 
+     * @return array
+     */
     public function getApplicants()
     {
         $sql = 'SELECT name, lastname, group_num, points FROM applicants';

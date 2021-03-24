@@ -17,6 +17,7 @@ class IndexController extends Controller
         $data = [
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,
+            'isUser' => $this->isUser(),
         ];
 
         echo $this->render($content, $template, $data);
