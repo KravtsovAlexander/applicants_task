@@ -6,13 +6,19 @@ use ApplicantTask\Applicant;
 use ApplicantTask\Core\Controller;
 use ApplicantTask\ApplicantsMapper;
 use ApplicantTask\ApplicantValidator;
+use ApplicantTask\FormService;
 use Exception;
 
 class RegistrationController extends Controller
 {
+    public function __construct() {
+        if ($this->isUser()) {
+            header('Location: /edit');
+        }
+    }
     public function indexAction()
     {
-        $content = 'registration.php';
+        $content = 'form.php';
         $template = 'template.php';
         $data = [
             'title' => 'Регистрация',
@@ -27,14 +33,7 @@ class RegistrationController extends Controller
 
         // make a new instance of Applicant
         $applicant = new Applicant();
-        $applicant->name = $post['name'];
-        $applicant->lastname = $post['lastname'];
-        $applicant->birthyear = $post['birthyear'];
-        $applicant->sex = $post['sex'];
-        $applicant->email = $post['email'];
-        $applicant->group_num = $post['group_num'];
-        $applicant->points = $post['points'];
-        $applicant->is_local = $post['is_local'];
+        FormService::fillFromPost($applicant, $post);
         $applicant->setToken(bin2hex(random_bytes(16)));
 
         // validate

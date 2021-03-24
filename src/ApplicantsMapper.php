@@ -81,4 +81,18 @@ class ApplicantsMapper
 
         return $statement->fetchAll();
     }
+
+    public function getByToken(string $token)
+    {
+        $sql = '
+            SELECT * FROM applicants
+            WHERE token = :token
+        ';
+        $data = ['token' => $token];
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($data);
+
+        return $statement->fetch();
+    }
+
 }

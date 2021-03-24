@@ -12,7 +12,7 @@
     <nav>
         <a href="/">Главная</a>
         <?php if ($isUser) : ?>
-            <a href="#">Редактировать профиль</a>
+            <a href="/edit">Редактировать профиль</a>
         <?php else : ?>
             <a href="/registration">Регистрация</a>
         <?php endif; ?>
