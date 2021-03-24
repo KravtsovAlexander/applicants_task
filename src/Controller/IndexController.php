@@ -1,8 +1,9 @@
 <?php
 
-namespace Dvach\Controller;
+namespace ApplicantTask\Controller;
 
-use Dvach\Core\Controller;
+use ApplicantTask\ApplicantsMapper;
+use ApplicantTask\Core\Controller;
 
 class IndexController extends Controller
 {
@@ -10,15 +11,9 @@ class IndexController extends Controller
     {
         $content = 'list.php';
         $template = 'template.php';
-        $applicants = [
-            [
-                'name' => 'Семён',
-                'lastname' => 'Персунов',
-                'group' => '2C-H',
-                'points' => '1337'
-            ]
-        ];
-
+        $mapper = new ApplicantsMapper();
+        $applicants = $mapper->getApplicants();
+        
         $data = [
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,

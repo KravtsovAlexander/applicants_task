@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvach\Core;
+namespace ApplicantTask\Core;
 
 class Router
 {
@@ -23,7 +23,7 @@ class Router
             $params = $routs[3];
         }
 
-        $controller = '\\Dvach\\Controller\\' . ucfirst(strtolower($controller)) .
+        $controller = '\\ApplicantTask\\Controller\\' . ucfirst(strtolower($controller)) .
             'Controller';
         $action = strtolower($action) . 'Action';
 

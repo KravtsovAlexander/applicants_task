@@ -1,6 +1,6 @@
 <?php
 
-namespace Dvach\Core;
+namespace ApplicantTask\Core;
 
 class Controller
 {

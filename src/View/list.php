@@ -18,9 +18,11 @@
             <tr>
                 <td><?php echo $app['name'] ?></td>
                 <td><?php echo $app['lastname'] ?></td>
-                <td><?php echo $app['group'] ?></td>
+                <td><?php echo $app['group_num'] ?></td>
                 <td><?php echo $app['points'] ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
+
 </section>
+<?php
