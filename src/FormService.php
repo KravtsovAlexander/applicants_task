@@ -4,6 +4,11 @@ namespace ApplicantTask;
 
 class FormService
 {
+    /**
+     * @param array $post $_POST array from the form
+     * 
+     * @return void
+     */
     static public function fillFromPost(Applicant $applicant, array $post)
     {
         $applicant->name = $post['name'];

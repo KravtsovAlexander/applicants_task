@@ -2,8 +2,16 @@
 
 namespace ApplicantTask\Core;
 
+use ApplicantTask\ApplicantsMapper;
+
 class Controller
 {
+    protected $mapper;
+
+    public function __construct() {
+        $this->mapper = new ApplicantsMapper();
+    }
+
     /**
      * @param string $content name to a specific component view file
      * @param string $template name to a base template file

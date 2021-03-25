@@ -11,10 +11,12 @@ use Exception;
 
 class RegistrationController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         if ($this->isUser()) {
             header('Location: /edit');
         }
+        parent::__construct();
     }
     public function indexAction()
     {
@@ -39,21 +41,13 @@ class RegistrationController extends Controller
         // validate
         try {
             ApplicantValidator::run($applicant);
-        } catch ( Exception $e) {
-            echo $e->getMessage();
-        }
 
-        // save to a db
-        $mapper = new ApplicantsMapper();
-        try {
-            $mapper->save($applicant);
-            setcookie('token', $applicant->getToken(), time()+60*60*24*365*10, '/');
+            // save to a db
+            $this->mapper->save($applicant);
+            setcookie('token', $applicant->getToken(), time() + 60 * 60 * 24 * 365 * 10, '/');
             header('Location: /');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
-
-
-
 }

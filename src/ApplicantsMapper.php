@@ -79,9 +79,16 @@ class ApplicantsMapper
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
-        return $statement->fetchAll();
+        return $statement->fetch();
     }
 
+    /**
+     * Fetch applicant's field by his token
+     * 
+     * @param string $token Token from cookies
+     * 
+     * @return array
+     */
     public function getByToken(string $token)
     {
         $sql = '
@@ -93,6 +100,31 @@ class ApplicantsMapper
         $statement->execute($data);
 
         return $statement->fetch();
+    }
+
+    public function update(Applicant $applicant)
+    {
+        $sql = '
+            UPDATE applicants
+            SET name = :name, lastname = :lastname, sex = :sex,
+                birthyear = :birthyear, email = :email, group_num = :group_num,
+                points = :points, is_local = :is_local
+            WHERE id = :id;
+        ';
+        $data = [
+            'name' => $applicant->name,
+            'lastname' => $applicant->lastname,
+            'sex' => $applicant->sex,
+            'birthyear' => $applicant->birthyear,
+            'email' => $applicant->email,
+            'group_num' => $applicant->group_num,
+            'points' => $applicant->points,
+            'is_local' => $applicant->is_local,
+            'id' => $applicant->getId(),
+        ];
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute($data);
     }
 
 }

@@ -13,7 +13,7 @@ abstract class ApplicantValidator
         self::checkLastname($applicant->name);
         self::checkGroupNum($applicant->group_num);
         self::checkPoints($applicant->points);
-        self::checkEmail($applicant->email);
+        self::checkEmail($applicant->email, $applicant->getId());
         self::checkBirthyear($applicant->birthyear);
     }
 
@@ -94,14 +94,14 @@ abstract class ApplicantValidator
      * 
      * @return true|Exception
      */
-    static private function checkEmail(string $email)
+    static private function checkEmail(string $email, $id = null)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception("Неверный формат email");
         }
 
         $mapper = new ApplicantsMapper();
-        if (!empty($mapper->getByEmail($email))) {
+        if (!empty($mapper->getByEmail($email)) && !$id) {
             throw new Exception("Email \"$email\" уже занят");
         }
 

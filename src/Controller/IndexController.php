@@ -11,8 +11,7 @@ class IndexController extends Controller
     {
         $content = 'list.php';
         $template = 'template.php';
-        $mapper = new ApplicantsMapper();
-        $applicants = $mapper->getApplicants();
+        $applicants = $this->mapper->getApplicants();
         
         $data = [
             'title' => 'Список абитуриентов',
