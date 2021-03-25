@@ -68,10 +68,10 @@ class ApplicantsMapper
         return $statement->fetchAll();
     }
 
-    public function getByEmail(string $email)
+    public function getIdByEmail(string $email)
     {
         $sql = '
-            SELECT name, lastname, group_num, points
+            SELECT id
             FROM applicants
             WHERE email = :email;
         ';
@@ -79,7 +79,7 @@ class ApplicantsMapper
         $statement = $this->connection->prepare($sql);
         $statement->execute($data);
 
-        return $statement->fetch();
+        return $statement->fetch(PDO::FETCH_COLUMN);
     }
 
     /**

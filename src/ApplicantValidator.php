@@ -101,7 +101,8 @@ abstract class ApplicantValidator
         }
 
         $mapper = new ApplicantsMapper();
-        if (!empty($mapper->getByEmail($email)) && !$id) {
+        $fetchId = $mapper->getIdByEmail($email);
+        if ($fetchId && $id !== $fetchId) {
             throw new Exception("Email \"$email\" уже занят");
         }
 
