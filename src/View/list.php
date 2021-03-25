@@ -7,6 +7,8 @@
         <input type="submit" value="Найти">
     </form>
 
+    <?php include 'navigation.php' ?>
+
     <table>
         <tr>
             <th>Имя</th>
@@ -14,7 +16,7 @@
             <th>Номер группы</th>
             <th>Баллов</th>
         </tr>
-        <?php foreach($applicants as $app): ?>
+        <?php foreach ($applicants as $app) : ?>
             <tr>
                 <td><?php echo $app['name'] ?></td>
                 <td><?php echo $app['lastname'] ?></td>
@@ -23,6 +25,6 @@
             </tr>
         <?php endforeach; ?>
     </table>
-
 </section>
-<?php
+
+<?php include 'navigation.php' ?>

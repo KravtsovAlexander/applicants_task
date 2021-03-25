@@ -55,19 +55,28 @@ class ApplicantsMapper
     }
 
     /**
-     * Fetch list information of the all appplicants in a db
+     * Fetch list information of the appplicants 
      * 
      * @return array
      */
-    public function getApplicants()
+    public function getApplicants(int $limit, int $offset)
     {
-        $sql = 'SELECT name, lastname, group_num, points FROM applicants';
+        $sql = '
+            SELECT name, lastname, group_num, points
+            FROM applicants
+            LIMIT :offset, :limit
+            ';
         $statement = $this->connection->prepare($sql);
+        $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll();
     }
 
+    /**
+     * @return string|false
+     */
     public function getIdByEmail(string $email)
     {
         $sql = '
@@ -75,9 +84,8 @@ class ApplicantsMapper
             FROM applicants
             WHERE email = :email;
         ';
-        $data = ['email' => $email];
         $statement = $this->connection->prepare($sql);
-        $statement->execute($data);
+        $statement->execute(['email' => $email]);
 
         return $statement->fetch(PDO::FETCH_COLUMN);
     }
@@ -95,9 +103,8 @@ class ApplicantsMapper
             SELECT * FROM applicants
             WHERE token = :token
         ';
-        $data = ['token' => $token];
         $statement = $this->connection->prepare($sql);
-        $statement->execute($data);
+        $statement->execute(['token' => $token]);
 
         return $statement->fetch();
     }
@@ -127,4 +134,14 @@ class ApplicantsMapper
         $statement->execute($data);
     }
 
+    public function getTotal()
+    {
+        $sql = '
+            SELECT COUNT(id)
+            FROM applicants;
+        ';
+        $statement = $this->connection->query($sql);
+
+        return $statement->fetch(PDO::FETCH_COLUMN);
+    }
 }
