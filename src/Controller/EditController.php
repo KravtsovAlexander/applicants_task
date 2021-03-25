@@ -37,6 +37,7 @@ class EditController extends Controller
             'points' => $this->data['points'],
             'birthyear' => $this->data['birthyear'],
             'is_local' => $this->data['is_local'],
+            'styles' => '/dist/css/form.css',
         ];
         echo $this->render($content, $template, $data);
     }

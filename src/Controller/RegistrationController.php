@@ -24,6 +24,7 @@ class RegistrationController extends Controller
         $data = [
             'title' => 'Регистрация',
             'isUser' => $this->isUser(),
+            'styles' => '/dist/css/form.css',
         ];
         echo $this->render($content, $template, $data);
     }

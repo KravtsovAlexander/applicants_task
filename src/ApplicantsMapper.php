@@ -67,7 +67,9 @@ class ApplicantsMapper
      */
     public function getApplicants(int $limit, int $offset)
     {
-        $sql = $this->queryForList() . ' LIMIT :offset, :limit';
+        $sql = $this->queryForList() .
+        ' ORDER BY points DESC
+        LIMIT :offset, :limit;';
 
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);

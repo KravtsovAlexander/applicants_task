@@ -7,7 +7,7 @@ use ApplicantTask\Pager;
 
 class IndexController extends Controller
 {
-    private $recordPerPage = 50;
+    private $recordPerPage = 40;
     private $pager;
 
     public function __construct() {
@@ -34,6 +34,7 @@ class IndexController extends Controller
             'applicants' => $applicants,
             'isUser' => $this->isUser(),
             'pages' => count($pages) > 1 ? $pages : null,
+            'styles' => '/dist/css/list.css',
         ];
 
         echo $this->render($content, $template, $data);
@@ -52,6 +53,7 @@ class IndexController extends Controller
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,
             'isUser' => $this->isUser(),
+            'styles' => '/dist/css/list.css',
         ];
 
         echo $this->render($content, $template, $data);
