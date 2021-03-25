@@ -1,8 +1,8 @@
 <section>
     <h1>Список абитуриентов</h1>
-    <form action="#" method="GET">
+    <form action="/index/search" method="POST">
         <label>Поиск:
-            <input type="text">
+            <input name="query" type="text">
         </label>
         <input type="submit" value="Найти">
     </form>

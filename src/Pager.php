@@ -2,22 +2,25 @@
 
 namespace ApplicantTask;
 
-/**
- * Calculate the number of pages
- */
 class Pager
 {
     private $totalRecords;
     private $perPage;
     private $linkTemplate;
 
-    public function __construct($totalRecords, $perPage, $linkTemplate)
+    /**
+     * @param $linkTemplate e.g. '/category/page/'
+     */
+    public function __construct(int $totalRecords, int $perPage, string $linkTemplate)
     {
         $this->totalRecords = $totalRecords;
         $this->perPage = $perPage;
         $this->linkTemplate = $linkTemplate;
     }
 
+    /**
+     * Calculate the total number of pages
+     */
     public function getTotalPages()
     {
         return ceil($this->totalRecords / $this->perPage);

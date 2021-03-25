@@ -54,6 +54,12 @@ class ApplicantsMapper
         $statement->execute($data);
     }
 
+    private function queryForList()
+    {
+        return 'SELECT name, lastname, group_num, points
+            FROM applicants';
+    }
+
     /**
      * Fetch list information of the appplicants 
      * 
@@ -61,11 +67,8 @@ class ApplicantsMapper
      */
     public function getApplicants(int $limit, int $offset)
     {
-        $sql = '
-            SELECT name, lastname, group_num, points
-            FROM applicants
-            LIMIT :offset, :limit
-            ';
+        $sql = $this->queryForList() . ' LIMIT :offset, :limit';
+
         $statement = $this->connection->prepare($sql);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -144,4 +147,25 @@ class ApplicantsMapper
 
         return $statement->fetch(PDO::FETCH_COLUMN);
     }
+
+    /**
+     * @param string $query
+     * 
+     * @return array
+     */
+    public function search(string $query)
+    {
+        $sql = $this->queryForList() . 
+        ' WHERE name LIKE concat(\'%\', :query ,\'%\')
+        OR lastname LIKE concat(\'%\', :query ,\'%\')
+        OR group_num LIKE concat(\'%\', :query ,\'%\')
+        OR points LIKE concat(\'%\', :query ,\'%\');';
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute(['query' => $query]);
+
+        return $statement->fetchAll();
+    }
+
+
 }

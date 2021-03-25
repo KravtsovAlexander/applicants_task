@@ -2,13 +2,18 @@
 
 namespace ApplicantTask\Controller;
 
-use ApplicantTask\ApplicantsMapper;
 use ApplicantTask\Core\Controller;
 use ApplicantTask\Pager;
 
 class IndexController extends Controller
 {
     private $recordPerPage = 50;
+    private $pager;
+
+    public function __construct() {
+        parent::__construct();
+        $this->pager = new Pager($this->mapper->getTotal(), $this->recordPerPage, '/index/page/');
+    }
 
     public function indexAction()
     {
@@ -20,11 +25,10 @@ class IndexController extends Controller
         $content = 'list.php';
         $template = 'template.php';
 
-        $pager = new Pager($this->mapper->getTotal(), $this->recordPerPage, '/index/page/');
-        $pages = $pager->getPages();
         $applicants = $this->mapper
             ->getApplicants($this->recordPerPage, ($page - 1) * $this->recordPerPage);
 
+        $pages = $this->pager->getPages();
         $data = [
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,
@@ -33,18 +37,23 @@ class IndexController extends Controller
         ];
 
         echo $this->render($content, $template, $data);
-
     }
 
-    private function renderPage($page)
+    public function searchAction()
     {
+        $post = $_POST;
+        if (empty($post['query'])) header('Location: /');
+
         $content = 'list.php';
         $template = 'template.php';
+
+        $applicants = $this->mapper->search($post['query']);
         $data = [
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,
             'isUser' => $this->isUser(),
-            'pages' => count($pages) > 1 ? $pages : null,
         ];
+
+        echo $this->render($content, $template, $data);
     }
 }

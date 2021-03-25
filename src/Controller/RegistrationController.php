@@ -4,7 +4,6 @@ namespace ApplicantTask\Controller;
 
 use ApplicantTask\Applicant;
 use ApplicantTask\Core\Controller;
-use ApplicantTask\ApplicantsMapper;
 use ApplicantTask\ApplicantValidator;
 use ApplicantTask\FormService;
 use Exception;

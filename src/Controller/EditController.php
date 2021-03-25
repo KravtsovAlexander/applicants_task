@@ -5,7 +5,6 @@ use Exception;
 use ApplicantTask\Applicant;
 use ApplicantTask\FormService;
 use ApplicantTask\Core\Controller;
-use ApplicantTask\ApplicantsMapper;
 use ApplicantTask\ApplicantValidator;
 
 class EditController extends Controller
