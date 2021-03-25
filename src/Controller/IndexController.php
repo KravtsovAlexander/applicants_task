@@ -35,6 +35,7 @@ class IndexController extends Controller
             'isUser' => $this->isUser(),
             'pages' => count($pages) > 1 ? $pages : null,
             'styles' => '/dist/css/list.css',
+            'script' => '/dist/list.bundle.js',
         ];
 
         echo $this->render($content, $template, $data);
@@ -53,7 +54,10 @@ class IndexController extends Controller
             'title' => 'Список абитуриентов',
             'applicants' => $applicants,
             'isUser' => $this->isUser(),
+            'query' => $post['query'],
+
             'styles' => '/dist/css/list.css',
+            'script' => '/dist/list.bundle.js',
         ];
 
         echo $this->render($content, $template, $data);

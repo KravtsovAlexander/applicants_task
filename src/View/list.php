@@ -4,7 +4,8 @@
             <h1>Список абитуриентов</h1>
             <form class="form-inline" action="/index/search" method="POST">
                     <input class="form-control mr-sm-2" name="query" type="text" placeholder="Поиск">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Найти">
+                <input class="btn btn-outline-success my-2 my-sm-0"
+                    data-query="<?php echo isset($query) ? $query : ''?>" id="search" type="submit" value="Найти">
             </form>
         </div>
 

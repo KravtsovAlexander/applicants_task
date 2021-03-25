@@ -69,7 +69,7 @@ module.exports = (env) => {
         new TerserWebpackPlugin(),
       ];
     } else {
-      optimizationObj.runtimeChunk = "single";
+      // optimizationObj.runtimeChunk = "single";
     }
 
     return optimizationObj;
