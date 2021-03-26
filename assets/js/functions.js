@@ -16,7 +16,7 @@ function mapTable(table) {
 
 /**
  * Sort table by clicking on a relevant <th>
- * @param {Event} event 
+ * @param {Event} event
  */
 function sortTable(event) {
   let tBody = document.querySelector("tbody"),
@@ -49,12 +49,24 @@ function sortTable(event) {
         if (elem.innerText === tempElem) tBody.append(elem.parentElement);
       });
     }
+    if (event.target.classList.contains("table__th--down")) {
+      event.target.classList.remove("table__th--down");
+      event.target.classList.add("table__th--up");
+    } else if (event.target.classList.contains("table__th--up")) {
+      event.target.classList.remove("table__th--up");
+      event.target.classList.add("table__th--down");
+    }
   } else {
     for (let tempElem of tempArr) {
       elemArr.forEach((elem) => {
         if (elem.innerText === tempElem) tBody.append(elem.parentElement);
       });
     }
+    event.target.parentElement.querySelectorAll("th").forEach((th) => {
+      th.classList.remove("table__th--up");
+      th.classList.remove("table__th--down");
+    });
+    event.target.classList.add("table__th--down");
   }
 }
 

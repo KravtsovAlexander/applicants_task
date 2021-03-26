@@ -1,0 +1,13 @@
+.table__th {
+  cursor: pointer;
+  &--up {
+    &::after {
+      content: "\21E7";
+    }
+  }
+  &--down {
+    &::after {
+      content: "\21E9";
+    }
+  }
+}

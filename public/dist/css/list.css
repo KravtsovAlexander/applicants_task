@@ -360,6 +360,13 @@ a {
     font-size: 2rem;
     font-family: 'Comfortaa', cursive; }
 
+.table__th {
+  cursor: pointer; }
+  .table__th--up::after {
+    content: "\21E7"; }
+  .table__th--down::after {
+    content: "\21E9"; }
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

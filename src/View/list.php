@@ -14,10 +14,10 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th>Имя</th>
-                    <th>Фамилия</th>
-                    <th>Номер группы</th>
-                    <th>Баллов</th>
+                    <th class="table__th">Имя</th>
+                    <th class="table__th">Фамилия</th>
+                    <th class="table__th">Номер группы</th>
+                    <th class="table__th">Баллов</th>
                 </tr>
             </thead>
             <?php foreach ($applicants as $app) : ?>

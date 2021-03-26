@@ -35,7 +35,7 @@ function mapTable(table) {
 }
 /**
  * Sort table by clicking on a relevant <th>
- * @param {Event} event 
+ * @param {Event} event
  */
 
 
@@ -83,6 +83,14 @@ function sortTable(event) {
     } finally {
       _iterator.f();
     }
+
+    if (event.target.classList.contains("table__th--down")) {
+      event.target.classList.remove("table__th--down");
+      event.target.classList.add("table__th--up");
+    } else if (event.target.classList.contains("table__th--up")) {
+      event.target.classList.remove("table__th--up");
+      event.target.classList.add("table__th--down");
+    }
   } else {
     var _iterator2 = _createForOfIteratorHelper(tempArr),
         _step2;
@@ -103,6 +111,12 @@ function sortTable(event) {
     } finally {
       _iterator2.f();
     }
+
+    event.target.parentElement.querySelectorAll("th").forEach(function (th) {
+      th.classList.remove("table__th--up");
+      th.classList.remove("table__th--down");
+    });
+    event.target.classList.add("table__th--down");
   }
 }
 
@@ -114,6 +128,18 @@ function sortTable(event) {
 /*!************************************************************!*\
   !*** ../node_modules/bootstrap/dist/css/bootstrap.min.css ***!
   \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "../assets/styles/list.scss":
+/*!**********************************!*\
+  !*** ../assets/styles/list.scss ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -198,8 +224,10 @@ var __webpack_exports__ = {};
   \****************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../styles/styles.scss */ "../assets/styles/styles.scss");
-/* harmony import */ var _node_modules_bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/bootstrap/dist/css/bootstrap.min.css */ "../node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./functions.js */ "../assets/js/functions.js");
+/* harmony import */ var _styles_list_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/list.scss */ "../assets/styles/list.scss");
+/* harmony import */ var _node_modules_bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/bootstrap/dist/css/bootstrap.min.css */ "../node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var _functions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./functions.js */ "../assets/js/functions.js");
+
 
 
  // search highlighting
@@ -213,9 +241,9 @@ cells.forEach(function (cell) {
 }); // table sorting
 
 var table = document.querySelector("table");
-(0,_functions_js__WEBPACK_IMPORTED_MODULE_2__.mapTable)(table);
+(0,_functions_js__WEBPACK_IMPORTED_MODULE_3__.mapTable)(table);
 table.querySelector("thead").querySelectorAll("th").forEach(function (th) {
-  th.addEventListener("click", _functions_js__WEBPACK_IMPORTED_MODULE_2__.sortTable);
+  th.addEventListener("click", _functions_js__WEBPACK_IMPORTED_MODULE_3__.sortTable);
 });
 })();
 

@@ -1,4 +1,5 @@
 import "../styles/styles.scss";
+import "../styles/list.scss";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import {mapTable, sortTable} from "./functions.js";
 
