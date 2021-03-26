@@ -1,7 +1,7 @@
 {
-  "name": "newproject",
+  "name": "Applicants",
   "version": "1.0.0",
-  "description": "webpack project",
+  "description": "educational project",
   "private": true,
   "scripts": {
     "build": "webpack --env production --mode=production",

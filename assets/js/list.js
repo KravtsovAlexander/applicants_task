@@ -7,7 +7,7 @@ import {mapTable, sortTable} from "./functions.js";
 let query = document.getElementById("search").dataset["query"],
   cells = document.querySelector("tbody").querySelectorAll("td");
 cells.forEach((cell) => {
-  let match = cell.innerText.search(query);
+  let match = cell.innerText.toLowerCase().search(query.toLowerCase());
   if (match === -1) return;
 
   cell.innerHTML =

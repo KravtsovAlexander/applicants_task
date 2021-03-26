@@ -11,27 +11,52 @@ $connection = new PDO(
     $config['password'],
     $options
 );
-$sql = '
+
+if ($argv[1] === 'init') {
+    $sql = '
+
+CREATE TABLE IF NOT EXISTS applicants(
+          id INT NOT NULL  AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+         sex VARCHAR(1) NOT NULL,
+   group_num VARCHAR(5) NOT NULL,
+       email VARCHAR(255) UNIQUE NOT NULL,
+      points INT NOT NULL,
+   birthyear VARCHAR(4) NOT NULL,
+    is_local BOOLEAN NOT NULL,
+       token VARCHAR(32) NOT NULL UNIQUE
+);';
+
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    exit('success');
+}
+
+if ((int) $argv[1]) {
+    $sql = '
     INSERT INTO applicants(name, lastname, sex, group_num, email, points, birthyear, is_local, token)
     VALUES
     (:name, :lastname, :sex, :group_num, :email, :points, :birthyear, :is_local, :token);
 ';
 
-for ($i = 0; $i < 300; $i++) {
-    $data = [
-        'name' => randStr(),
-        'lastname' => randStr(),
-        'sex' => array_rand(['f', 'm']),
-        'group_num' => randGroup(),
-        'email' =>  randEmail(),
-        'points' => mt_rand(1, 300),
-        'birthyear' => mt_rand(1990, 2000),
-        'is_local' => mt_rand(0, 1),
-        'token' => bin2hex(random_bytes(16)),
-    ];
+    for ($i = 0; $i < (int) $argv[1]; $i++) {
+        $data = [
+            'name' => randStr(),
+            'lastname' => randStr(),
+            'sex' => array_rand(['f', 'm']),
+            'group_num' => randGroup(),
+            'email' =>  randEmail(),
+            'points' => mt_rand(1, 300),
+            'birthyear' => mt_rand(1990, 2000),
+            'is_local' => mt_rand(0, 1),
+            'token' => bin2hex(random_bytes(16)),
+        ];
 
-    $statement = $connection->prepare($sql);
-    $statement->execute($data);
+        $statement = $connection->prepare($sql);
+        $statement->execute($data);
+    }
+    exit('success');
 }
 
 function randStr()
