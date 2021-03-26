@@ -1,4 +1,5 @@
 .table__th {
+  user-select: none;
   cursor: pointer;
   &--up {
     &::after {

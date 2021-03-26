@@ -361,6 +361,7 @@ a {
     font-family: 'Comfortaa', cursive; }
 
 .table__th {
+  user-select: none;
   cursor: pointer; }
   .table__th--up::after {
     content: "\21E7"; }
