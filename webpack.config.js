@@ -144,10 +144,6 @@ module.exports = (env) => {
     module: {
       rules: [
         {
-          test: /\.html$/i,
-          loader: "html-loader",
-        },
-        {
           test: /\.css$/,
           use: cssLoaders(),
         },
