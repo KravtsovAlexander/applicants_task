@@ -41,3 +41,8 @@ The site for registration of applicants and display of list of them.
 4. to run webpack in dev mode:
     ```bash
     $ npm run start
+5. if you use the php built-in web server run it in the `/public` directory:
+    ```bash
+    $ cd ./public
+    $ php -S localhost:8080
+    ```
