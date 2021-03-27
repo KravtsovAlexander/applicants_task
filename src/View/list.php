@@ -5,7 +5,7 @@
             <form class="form-inline" action="/index/search" method="POST">
                     <input class="form-control mr-sm-2" name="query" type="text" placeholder="Поиск">
                 <input class="btn btn-outline-success my-2 my-sm-0"
-                    data-query="<?php echo isset($query) ? $query : ''?>" id="search" type="submit" value="Найти">
+                    data-query="<?php echo isset($query) ? htmlspecialchars($query) : ''?>" id="search" type="submit" value="Найти">
             </form>
         </div>
 
@@ -22,10 +22,10 @@
             </thead>
             <?php foreach ($applicants as $app) : ?>
                 <tr>
-                    <td><?php echo $app['name'] ?></td>
-                    <td><?php echo $app['lastname'] ?></td>
-                    <td><?php echo $app['group_num'] ?></td>
-                    <td><?php echo $app['points'] ?></td>
+                    <td><?php echo htmlspecialchars($app['name']) ?></td>
+                    <td><?php echo htmlspecialchars($app['lastname']) ?></td>
+                    <td><?php echo htmlspecialchars($app['group_num']) ?></td>
+                    <td><?php echo htmlspecialchars($app['points']) ?></td>
                 </tr>
             <?php endforeach; ?>
         </table>

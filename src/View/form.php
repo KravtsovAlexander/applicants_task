@@ -11,12 +11,12 @@
 
         <div class="form-group">
             <input class="form-control" type="text" name="name" id="name" placeholder="Имя"
-                value="<?php echo isset($name) ? $name : '' ?>">
+                value="<?php echo isset($name) ? htmlspecialchars($name) : '' ?>">
         </div>
 
         <div class="form-group">
             <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Фамилия"
-                value="<?php echo isset($lastname) ? $lastname : '' ?>">
+                value="<?php echo isset($lastname) ? htmlspecialchars($lastname) : '' ?>">
         </div>
 
         <div class="form-group">
@@ -33,22 +33,22 @@
 
         <div class="form-group">
             <input class="form-control" type="text" name="group_num" id="group_num" placeholder="Номер группы"
-                value="<?php echo isset($group_num) ? $group_num : '' ?>">
+                value="<?php echo isset($group_num) ? htmlspecialchars($group_num) : '' ?>">
         </div>
 
         <div class="form-group">
             <input class="form-control" type="text" name="email" id="email" placeholder="email"
-                value="<?php echo isset($email) ? $email : '' ?>">
+                value="<?php echo isset($email) ? htmlspecialchars($email) : '' ?>">
         </div>
 
         <div class="form-group">
             <input class="form-control" type="text" name="points" id="points" placeholder="Суммарное число баллов ЕГЭ"
-                value="<?php echo isset($points) ? $points : '' ?>">
+                value="<?php echo isset($points) ? htmlspecialchars($points) : '' ?>">
         </div>
 
         <div class="form-group">
             <input class="form-control" type="text" name="birthyear" id="birthyear" placeholder="Год рождения"
-                value="<?php echo isset($birthyear) ? $birthyear : '' ?>">
+                value="<?php echo isset($birthyear) ? htmlspecialchars($birthyear) : '' ?>">
         </div>
 
         <div class="form-group">
